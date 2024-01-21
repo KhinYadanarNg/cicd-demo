@@ -18,7 +18,7 @@
 		<java.version>17</java.version>
 		<sonar.organization>KhinYadanarNg</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io/</sonar.host.url>
-		<sonar.projectKey>khinyadanarng</sonar.projectKey>
+		<sonar.projectKey>KhinYadanarNg_cicd-demo</sonar.projectKey>
  
 	</properties>
 	<dependencies>
