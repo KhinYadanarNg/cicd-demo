@@ -47,6 +47,8 @@ jobs:
         working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
       
       - uses: actions/checkout@master
+      - name: Set file permissions
+        run: chmod 644 snyk.sarif
       - name: Debug SARIF file location
         run: |
           ls -al
