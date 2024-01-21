@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
     - name: Build with Maven
       run: mvn clean install
-      working-directory: https://github.com/KhinYadanarNg/cicd-demo/blob/KhinYadanarNg-patch-1/d13-master/pom.xml
+      working-directory: /KhinYadanarNg-patch-1/d13-master/
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
