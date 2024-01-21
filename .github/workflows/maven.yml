@@ -45,6 +45,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
+          checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
       - name: Debug SARIF file location
         run: |
           ls -al
