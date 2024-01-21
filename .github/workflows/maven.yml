@@ -46,7 +46,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=KhinYadanarNg_cicd-demo
         working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
       
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
         continue-on-error: true
