@@ -27,7 +27,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Run the Maven verify phase
-      run: mvn -B package --file pom.xml
+      run: mvn exec:java -Dexec.mainClass="crawler.WebInterface" -Dexec.args="${/d13-master/}/database ${/d13-master/}/www" -f ${/d13-master/} pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
