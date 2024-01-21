@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
     - name: List Files
       run: ls -R
-      working-directory: /home/runner/work/cicd-demo/cicd-demo
+      working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
