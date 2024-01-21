@@ -47,12 +47,6 @@ jobs:
         working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
       
       - uses: actions/checkout@master
-      - name: Set file permissions
-        run: chmod 644 snyk.sarif
-      - name: Debug SARIF file location
-        run: |
-          ls -al
-          find . -type f -name "snyk.sarif" -print
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
         continue-on-error: true
@@ -60,6 +54,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --sarif-file-output=snyk.sarif
+      - name: Debug SARIF file location
+        run: |
+          ls -al
+          find . -type f -name "snyk.sarif" -print
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
