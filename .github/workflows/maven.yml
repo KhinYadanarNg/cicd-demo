@@ -26,8 +26,9 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Build with Maven
-      run: mvn clean install
+    - name: List Files
+      run: ls -R
+      working-directory: /home/runner/work/cicd-demo/cicd-demo
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
