@@ -42,7 +42,7 @@ jobs:
       
       - uses: actions/checkout@master
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
       - name: Debug SARIF file location
