@@ -10,7 +10,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "KhinYadanarNg-patch-" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -26,7 +26,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: maven
     - name: Run the Maven verify phase
       run: mvn --batch-mode --update-snapshots verify
 
