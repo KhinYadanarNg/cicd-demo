@@ -71,11 +71,19 @@ jobs:
         run: npm install -g snyk
       - name: Install dependencies
         run: npm install
+      - name: Run ESLint
+        # eslint exits 1 if it finds anything to report
+        run: node_modules/.bin/eslint build docs lib script spec-main -f node_modules/@microsoft/eslint-formatter-sarif/sarif.js -o synk.sarif || true
+      # Uploads results.sarif to GitHub repository using the upload-sarif action
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: synk.sarif
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: .sarif
+          sarif_file: synk.sarif
       - name: Debug workflow
         run: |
            pwd
