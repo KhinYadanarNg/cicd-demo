@@ -45,10 +45,14 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       #   run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=KhinYadanarNg_cicd-demo
       #   working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
-       - uses: actions/checkout@master
-       - name: Run Snyk to check for vulnerabilities
-         uses: snyk/actions/maven@master
-         continue-on-error: true # To make sure that SARIF upload gets called 
+       -  uses: actions/checkout@master
+       -  name: Run Snyk to check for vulnerabilities
+          uses: snyk/actions/maven@master
+       -  name: Snyk Test
+          run: |
+            cd /home/runner/work/cicd-demo/cicd-demo/d13-master
+            snyk test
+          continue-on-error: true # To make sure that SARIF upload gets called 
          env:
            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
          with:
