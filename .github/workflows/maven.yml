@@ -63,6 +63,8 @@ jobs:
           pwd
           ls -R
         working-directory: /home/runner/work/_actions/github/codeql-action/v2
+      - name: Run npm install
+        run: npm install
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
