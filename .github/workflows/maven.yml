@@ -63,13 +63,12 @@ jobs:
           pwd
           ls -R
         working-directory: /home/runner/work/_actions/github/codeql-action/v2
-      - name: Install Snyk CLI
-        run: npm install -g snyk
       - name: Install Node.js and npm
         uses: actions/setup-node@v2
         with:
          node-version: '14'
-
+      - name: Install Snyk CLI
+        run: npm install -g snyk
       - name: Install dependencies
         run: npm install
 
