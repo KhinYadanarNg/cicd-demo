@@ -57,6 +57,9 @@ jobs:
       - name: Find specific file
         run: |
          find . -type f -name "snyk.sarif" -print
+      - name: Find files by extension
+        run: |
+         find . -type f -name "*.your_extension" -print
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
