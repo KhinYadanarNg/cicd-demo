@@ -66,10 +66,12 @@ jobs:
       - name: Run npm install
         run: npm install -g snyk
         working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
+      - name: Run Snyk security scan
+        run: snyk test --sarif > snyk.sarif
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
-             sarif_file: /home/runner/work/cicd-demo/cicd-demo/d13-master
+             sarif_file: snyk.sarif
       - name: Debug workflow
         run: |
            pwd
