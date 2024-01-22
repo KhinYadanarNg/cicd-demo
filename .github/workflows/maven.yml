@@ -47,7 +47,7 @@ jobs:
       #   working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
       
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup CodeQL
         uses: github/codeql-action/setup-codeql@v1
       - name: Build and analyze code
