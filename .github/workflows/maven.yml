@@ -45,83 +45,94 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       #   run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=KhinYadanarNg_cicd-demo
       #   working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
-      
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Setup CodeQL
-        uses: github/codeql-action/setup-codeql@v1
-      - name: Build and analyze code
-        run: |
-          codeql database create codeql-db --language=java --command="mvn clean install"
-          codeql database analyze codeql-db --sarif=snyk.sarif
-      - name: Debug SARIF file location
-        run: |
-          ls -al
-          find . -type f -name "snyk.sarif" -print
-      - name: Debug SARIF file location
-        run: ls -al d13-master
-      - name: Find specific file
-        run: |
-         find . -type f -name "snyk.sarif" -print
-      - name: Find files by extension
-        run: |
-         ls -al
-         find . -type f -name "*.sarif" -print
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: d13-master/snyk.sarif
-          checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
-          # Optional category for the results
-          # Used to differentiate multiple results for one commit
-          category: my-analysis-tool
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/maven@master
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --sarif-file-output=snyk.sarif
-      - name: Debug SARIF file location
-        run: |
-          ls -al
-          find . -type f -name "snyk.sarif" -print
-      - name: Debug File Structure
-        run: |
-          pwd
-          ls -R
-        working-directory: /home/runner/work/_actions/github/codeql-action/v2
-      - name: Install Node.js and npm
-        uses: actions/setup-node@v2
-        with:
-         node-version: '14'
-      - name: Install Snyk CLI
-        run: npm install -g snyk
-      - name: Install dependencies
-        run: npm install
-      - name: Run ESLint
-        # eslint exits 1 if it finds anything to report
-        run: node_modules/.bin/eslint build docs lib script spec-main -f node_modules/@microsoft/eslint-formatter-sarif/sarif.js -o snyk.sarif || true
-      # Uploads results.sarif to GitHub repository using the upload-sarif action
-      - uses: github/codeql-action/upload-sarif@v2
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: snyk.sarif
+       - uses: actions/checkout@master
+       - name: Run Snyk to check for vulnerabilities
+         uses: snyk/actions/maven@master
+         continue-on-error: true # To make sure that SARIF upload gets called 
+         env:
+           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
+         with:
+            args: --sarif-file-output=snyk.sarif
+       - name: Upload result to GitHub Code Scanning
+         uses: github/codeql-action/upload-sarif@v2 
+         with:
+            sarif_file: snyk.sarif
+      # - name: Checkout repository
+      #   uses: actions/checkout@v2
+      # - name: Setup CodeQL
+      #   uses: github/codeql-action/setup-codeql@v1
+      # - name: Build and analyze code
+      #   run: |
+      #     codeql database create codeql-db --language=java --command="mvn clean install"
+      #     codeql database analyze codeql-db --sarif=snyk.sarif
+      # - name: Debug SARIF file location
+      #   run: |
+      #     ls -al
+      #     find . -type f -name "snyk.sarif" -print
+      # - name: Debug SARIF file location
+      #   run: ls -al d13-master
+      # - name: Find specific file
+      #   run: |
+      #    find . -type f -name "snyk.sarif" -print
+      # - name: Find files by extension
+      #   run: |
+      #    ls -al
+      #    find . -type f -name "*.sarif" -print
+      # - name: Upload SARIF file
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     # Path to SARIF file relative to the root of the repository
+      #     sarif_file: d13-master/snyk.sarif
+      #     checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
+      #     # Optional category for the results
+      #     # Used to differentiate multiple results for one commit
+      #     category: my-analysis-tool
+      # - name: Run Snyk to check for vulnerabilities
+      #   uses: snyk/actions/maven@master
+      #   continue-on-error: true
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #   with:
+      #     args: --sarif-file-output=snyk.sarif
+      # - name: Debug SARIF file location
+      #   run: |
+      #     ls -al
+      #     find . -type f -name "snyk.sarif" -print
+      # - name: Debug File Structure
+      #   run: |
+      #     pwd
+      #     ls -R
+      #   working-directory: /home/runner/work/_actions/github/codeql-action/v2
+      # - name: Install Node.js and npm
+      #   uses: actions/setup-node@v2
+      #   with:
+      #    node-version: '14'
+      # - name: Install Snyk CLI
+      #   run: npm install -g snyk
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Run ESLint
+      #   # eslint exits 1 if it finds anything to report
+      #   run: node_modules/.bin/eslint build docs lib script spec-main -f node_modules/@microsoft/eslint-formatter-sarif/sarif.js -o snyk.sarif || true
+      # # Uploads results.sarif to GitHub repository using the upload-sarif action
+      # - uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     # Path to SARIF file relative to the root of the repository
+      #     sarif_file: snyk.sarif
 
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
-      - name: Debug workflow
-        run: |
-           pwd
-           ls -al
-           find . -type f -name "snyk.sarif" -print
+      # - name: Upload SARIF file
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: snyk.sarif
+      # - name: Debug workflow
+      #   run: |
+      #      pwd
+      #      ls -al
+      #      find . -type f -name "snyk.sarif" -print
 
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
-          checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
+      # - name: Upload result to GitHub Code Scanning
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: snyk.sarif
+      #     checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
          
