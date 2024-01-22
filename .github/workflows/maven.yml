@@ -69,16 +69,16 @@ jobs:
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
-             sarif_file: snyk.sarif
+             sarif_file: results.sarif
       - name: Debug workflow
         run: |
            pwd
            ls -al
-           find . -type f -name "snyk.sarif" -print
+           find . -type f -name "results.sarif" -print
 
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk.sarif
+          sarif_file: results.sarif
           checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
          
