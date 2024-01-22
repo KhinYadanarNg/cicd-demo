@@ -60,7 +60,7 @@ jobs:
       - name: Find files by extension
         run: |
          ls -al
-         find . -type f -name "*.sarif" -print
+         find . -type f -name "*.sairf" -print
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
