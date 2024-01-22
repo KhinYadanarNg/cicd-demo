@@ -52,11 +52,13 @@ jobs:
         run: |
           ls -al
           find . -type f -name "snyk.sarif" -print
+      - name: Debug SARIF file location
+        run: ls -al d13-master
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
-          sarif_file: /home/runner/work/cicd-demo/cicd-demo/d13-master/synk.sarif
+          sarif_file: d13-master/snyk.sarif
           checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
           # Optional category for the results
           # Used to differentiate multiple results for one commit
