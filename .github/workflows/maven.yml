@@ -49,7 +49,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup CodeQL
-        uses: github/codeql-action/setup-codeql@v2
+        uses: github/codeql-action/setup-codeql@v1
       - name: Build and analyze code
         run: |
           codeql database create codeql-db --language=java --command="mvn clean install"
