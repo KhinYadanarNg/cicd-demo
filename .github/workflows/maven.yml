@@ -65,6 +65,7 @@ jobs:
         working-directory: /home/runner/work/_actions/github/codeql-action/v2
       - name: Run npm install
         run: npm install
+        working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
