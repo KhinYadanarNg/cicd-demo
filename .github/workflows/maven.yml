@@ -52,8 +52,8 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
-          checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
           sarif_file: results.sarif
+          working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
           # Optional category for the results
           # Used to differentiate multiple results for one commit
           category: my-analysis-tool
