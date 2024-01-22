@@ -63,22 +63,30 @@ jobs:
           pwd
           ls -R
         working-directory: /home/runner/work/_actions/github/codeql-action/v2
-      - name: Run npm install
-        run: npm install -g snyk
-        working-directory: /home/runner/work/cicd-demo/cicd-demo/d13-master
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
         with:
-             sarif_file: results.sarif
+         node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Snyk security scan
+        run: snyk test --sarif > snyk.sarif
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: .sarif
       - name: Debug workflow
         run: |
            pwd
            ls -al
-           find . -type f -name "results.sarif" -print
+           find . -type f -name "snyk.sarif" -print
 
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: results.sarif
+          sarif_file: snyk.sarif
           checkout_path: /home/runner/work/cicd-demo/cicd-demo/d13-master
          
