@@ -63,6 +63,16 @@ jobs:
           pwd
           ls -R
         working-directory: /home/runner/work/_actions/github/codeql-action/v2
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+             sarif_file: /home/runner/work/cicd-demo/cicd-demo/d13-master/snyk.sarif
+      - name: Debug workflow
+        run: |
+           pwd
+           ls -al
+           find . -type f -name "snyk.sarif" -print
+
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
