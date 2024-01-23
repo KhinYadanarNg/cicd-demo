@@ -18,7 +18,7 @@ jobs:
     steps:
        -  uses: actions/checkout@master
        -  run: |
-           echo ${{ github.workspace }}
+           echo ${{ github.workspace }}/d13-master
            echo $GITHUB_WORKSPACE
        -  name: Change to project directory
           run: cd /home/runner/work/cicd-demo/cicd-demo/d13-master
