@@ -34,12 +34,12 @@ jobs:
           env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
           with:
-            args: --file=${{ github.workspace }} --sarif-file-output=snyk.sarif
+            args: --file=${{ github.workspace }}/d13-master --sarif-file-output=snyk.sarif
             json: true
        - name: Upload result to GitHub Code Scanning
          uses: github/codeql-action/upload-sarif@v2 
          with:
-            sarif_file: snyk.sarif
+            sarif_file: ${{ github.workspace }}/d13-maste/snyk.sarif
       # - uses: actions/checkout@v3
       #   with:
       #     fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
