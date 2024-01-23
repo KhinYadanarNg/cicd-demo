@@ -17,14 +17,14 @@ jobs:
       contents: read
     steps:
        -  uses: actions/checkout@master
+       -  name: Change to project directory
+          run: cd /home/runner/work/cicd-demo/cicd-demo/d13-master
        -  name: Debugging
           run: |
            echo "Current working directory:"
            pwd
            echo "Contents of /github/workspace:"
            ls -al /github/workspace
-       -  name: Change to project directory
-          run: cd /home/runner/work/cicd-demo/cicd-demo/d13-master
        -  name: Run Snyk to check for vulnerabilities
           uses: snyk/actions/maven@master
           continue-on-error: true # To make sure that SARIF upload gets called 
