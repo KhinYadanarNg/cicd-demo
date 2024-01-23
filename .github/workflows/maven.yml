@@ -28,8 +28,7 @@ jobs:
           env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
           with:
-            args: --file=${{ github.workspace }}/d13-master --sarif-file-output=snyk.sarif
-            json: true
+            args: --sarif-file-output=snyk.sarif
        - name: Upload result to GitHub Code Scanning
          uses: github/codeql-action/upload-sarif@v2 
          with:
