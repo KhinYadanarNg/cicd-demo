@@ -25,7 +25,7 @@ jobs:
           env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
           with:
-            args: --sarif-file-output=snyk.sarif
+            args: --file=/home/runner/work/cicd-demo/cicd-demo/d13-master/pom.xml --sarif-file-output=snyk.sarif
             json: true
        - name: Upload result to GitHub Code Scanning
          uses: github/codeql-action/upload-sarif@v2 
