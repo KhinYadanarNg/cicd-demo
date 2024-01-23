@@ -39,7 +39,7 @@ jobs:
        - name: Upload result to GitHub Code Scanning
          uses: github/codeql-action/upload-sarif@v2 
          with:
-            sarif_file: ${{ github.workspace }}/d13-maste/snyk.sarif
+            sarif_file: ${{ github.workspace }}/d13-master/snyk.sarif
       # - uses: actions/checkout@v3
       #   with:
       #     fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
