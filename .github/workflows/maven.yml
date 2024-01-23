@@ -27,7 +27,7 @@ jobs:
            echo "Current working directory:"
            pwd
            echo "Contents of /github/workspace:"
-           ls -al /github/workspace
+           ls -al ${{ github.workspace }}/d13-master
        -  name: Run Snyk to check for vulnerabilities
           uses: snyk/actions/maven@master
           continue-on-error: true # To make sure that SARIF upload gets called 
